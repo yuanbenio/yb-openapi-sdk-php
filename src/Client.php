@@ -10,8 +10,7 @@ use YuanBen\Exceptions\PropertyNotExistException;
 class Client
 {
     protected $config;
-//    protected $apiBase = 'https://openapi.yuanben.io/';
-    protected $apiBase = 'http://work.io:8000/';
+    protected $apiBase = 'https://openapi.yuanben.io/';
     protected $httpClient;
     protected $baseVersion = 'v1';
 
