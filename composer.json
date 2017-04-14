@@ -1,0 +1,14 @@
+{
+    "name": "yuanben/yb-openapi-sdk-php",
+    "description": "yb-openapi-sdk-php",
+    "require": {
+        "php": ">=5.4",
+        "guzzlehttp/guzzle": ">=5.3",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": { "YuanBen\\" : "src/" }
+    },
+    "license": "MIT"
+}
