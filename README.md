@@ -87,5 +87,17 @@ $response = $client->post($collect);
 
 $status = $response->getStatusCode();
 
-swit
+switch ($status) {
+    case 200:
+        $responseData = $response->getBody()->getContents();
+        break;
+    case 422:
+        $errorMessage = $response->getBody()->getContents();
+        break;
+    case 401:
+        $errorMessage = $response->getBody()->getContents();
+        break;
+    default:
+        break;
+}
 ```
