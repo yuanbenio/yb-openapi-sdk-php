@@ -8,7 +8,7 @@ use Yuanben\Exceptions\PropertyNotExistException;
 
 class Collection implements Arrayable, \Iterator, \Countable, Operable
 {
-    protected $items = [];
+    protected $items = array();
     protected $position = 0;
     protected $class;
 

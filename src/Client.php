@@ -41,6 +41,13 @@ class Client
         return $this;
     }
 
+    public function setApiBase($apiBase)
+    {
+        $this->apiBase = $apiBase;
+
+        return $this;
+    }
+
     public function setHttpClient($client)
     {
         $this->httpClient = $client;
@@ -67,7 +74,7 @@ class Client
         $data = $resources->toArray();
 
         if (! $resources instanceof Collection) {
-            $data = [$data];
+            $data = array($data);
         }
 
         $response = $this->httpClient->post($path, array(

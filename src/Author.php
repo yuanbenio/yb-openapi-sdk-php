@@ -26,9 +26,9 @@ class Author implements Arrayable
 
     public function toArray()
     {
-        return [
+        return array(
             'email' => $this->email,
             'pseudonym' => $this->pseudonym
-        ];
+        );
     }
 }

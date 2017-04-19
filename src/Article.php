@@ -71,17 +71,17 @@ class Article implements Arrayable, Operable
 
     public function toArray()
     {
-        $article = [
+        $article = array(
             'title' => $this->title,
             'content' => $this->content
-        ];
+        );
 
         if ($this->author instanceof Author) {
-            $article = array_merge($article, ['author' => $this->author->toArray()]);
+            $article = array_merge($article, array('author' => $this->author->toArray()));
         }
 
         if ($this->license instanceof License) {
-            $article = array_merge($article, ['license' => $this->license->toArray()]);
+            $article = array_merge($article, array('license' => $this->license->toArray()));
         }
 
         return $article;
