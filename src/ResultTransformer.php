@@ -25,6 +25,11 @@ class ResultTransformer
             $this->class = get_class($this->original);
         }
 
+        return $this->doProcess();
+    }
+
+    public function doProcess()
+    {
         switch ($this->class) {
             case 'Yuanben\Article':
                 return $this->articleProcess();
@@ -50,8 +55,10 @@ class ResultTransformer
     public function transArticle($singleData)
     {
         $article = new Article($singleData['title'], $singleData['content']);
-        $license = License::fromJson(json_encode($singleData['license']));
-        $article->setLicense($license);
+        if (isset($singleData['license'])) {
+            $license = License::fromJson(json_encode($singleData['license']));
+            $article->setLicense($license);
+        }
 
         return $article;
     }

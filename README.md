@@ -20,7 +20,7 @@ $article->setLicense($license);
 
 $response = $client->post($article);
 
-var_dump($response instance of Article);
+var_dump($response instanceof Article);
 
 // multiple data
 $collect = new Collection();
@@ -32,7 +32,7 @@ $collect->push($article)->push($article2);
 
 $response = $client->post($collect);
 
-var_dump($response instance of Colletion);
+var_dump($response instanceof Colletion);
 
 ```
 
