@@ -1,11 +1,11 @@
 <?php
-namespace YuanBen;
+namespace Yuanben;
 
 use GuzzleHttp\Client as HttpClient;
 
-use YuanBen\Contracts\Operable;
-use YuanBen\Exceptions\InvalidInstanceException;
-use YuanBen\Exceptions\PropertyNotExistException;
+use Yuanben\Contracts\Operable;
+use Yuanben\Exceptions\InvalidInstanceException;
+use Yuanben\Exceptions\PropertyNotExistException;
 
 class Client
 {
@@ -37,7 +37,7 @@ class Client
         } elseif ($config instanceof Config) {
             $this->config = $config;
         } else {
-            throw new InvalidInstanceException('The $config argument must be an instance of YuanBen\Config.');
+            throw new InvalidInstanceException('The $config argument must be an instance of Yuanben\Config.');
         }
 
         return $this;

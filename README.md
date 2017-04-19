@@ -1,4 +1,4 @@
-# YuanBen/yb-openapi-sdk-php
+# Yuanben/yb-openapi-sdk-php
 
 ## Usage
 
@@ -78,6 +78,12 @@ $response = $client->post($collect);
 
 $body = $response->getBody()->getContents();
 
+```
+
+## License Instance
+
+```
+$license = License::fromJson($json);
 ```
 
 ## Exception

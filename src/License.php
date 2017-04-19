@@ -1,9 +1,9 @@
 <?php
-namespace YuanBen;
+namespace Yuanben;
 
-use YuanBen\Contracts\Arrayable;
-use YuanBen\Exceptions\InvalidDataTypeException;
-use YuanBen\Exceptions\InvalidLicenseTypeException;
+use Yuanben\Contracts\Arrayable;
+use Yuanben\Exceptions\InvalidDataTypeException;
+use Yuanben\Exceptions\InvalidLicenseTypeException;
 
 class License implements Arrayable
 {
@@ -162,7 +162,7 @@ class License implements Arrayable
         return $this->type === self::LICENSE_CM;
     }
 
-    public static function loadByJson($jsonData)
+    public static function fromJson($jsonData)
     {
         $data = \GuzzleHttp\json_decode($jsonData, true);
 

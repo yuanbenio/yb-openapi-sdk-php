@@ -1,7 +1,7 @@
 <?php
-namespace YuanBen;
+namespace Yuanben;
 
-use YuanBen\Contracts\Arrayable;
+use Yuanben\Contracts\Arrayable;
 
 class Author implements Arrayable
 {

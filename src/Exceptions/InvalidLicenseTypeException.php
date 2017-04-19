@@ -1,5 +1,5 @@
 <?php
-namespace YuanBen\Exceptions;
+namespace Yuanben\Exceptions;
 
 class InvalidLicenseTypeException extends \Exception
 {

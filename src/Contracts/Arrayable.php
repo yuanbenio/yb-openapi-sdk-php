@@ -1,5 +1,5 @@
 <?php
-namespace YuanBen\Contracts;
+namespace Yuanben\Contracts;
 
 interface Arrayable
 {

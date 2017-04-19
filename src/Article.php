@@ -1,9 +1,9 @@
 <?php
-namespace YuanBen;
+namespace Yuanben;
 
-use YuanBen\Contracts\Arrayable;
-use YuanBen\Contracts\Operable;
-use YuanBen\Exceptions\InvalidDataTypeException;
+use Yuanben\Contracts\Arrayable;
+use Yuanben\Contracts\Operable;
+use Yuanben\Exceptions\InvalidDataTypeException;
 
 class Article implements Arrayable, Operable
 {

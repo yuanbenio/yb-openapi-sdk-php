@@ -1,10 +1,10 @@
 <?php
-namespace YuanBen;
+namespace Yuanben;
 
-use YuanBen\Contracts\Arrayable;
-use YuanBen\Contracts\Operable;
-use YuanBen\Exceptions\InvalidInstanceException;
-use YuanBen\Exceptions\PropertyNotExistException;
+use Yuanben\Contracts\Arrayable;
+use Yuanben\Contracts\Operable;
+use Yuanben\Exceptions\InvalidInstanceException;
+use Yuanben\Exceptions\PropertyNotExistException;
 
 class Collection implements Arrayable, \Iterator, \Countable, Operable
 {
