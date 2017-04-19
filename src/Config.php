@@ -30,7 +30,7 @@ class Config
 
     public function userCanBe($userType)
     {
-        $allows = [self::USER_MEDIA, self::USER_PLATFORM];
+        $allows = array(self::USER_MEDIA, self::USER_PLATFORM);
 
         return array_search($userType, $allows) !== false;
     }

@@ -93,7 +93,7 @@ class License implements Arrayable
 
     protected function checkCommercial($commercial)
     {
-        if (array_search($commercial, [self::LICENSE_CC_COMMERCIAL_Y, self::LICENSE_CC_COMMERCIAL_N]) === false) {
+        if (array_search($commercial, array(self::LICENSE_CC_COMMERCIAL_Y, self::LICENSE_CC_COMMERCIAL_N)) === false) {
                 throw new InvalidDataTypeException('The commercial value must be one of [y, n].');
         }
     }
@@ -101,13 +101,13 @@ class License implements Arrayable
     public function checkAdaptation($adaptation)
     {
         if ($this->type === self::LICENSE_CC) {
-            $allows = [self::LICENSE_CC_ADAPTATION_N, self::LICENSE_CC_ADAPTATION_Y, self::LICENSE_CC_ADAPTATION_SA];
+            $allows = array(self::LICENSE_CC_ADAPTATION_N, self::LICENSE_CC_ADAPTATION_Y, self::LICENSE_CC_ADAPTATION_SA);
 
             if (array_search($adaptation, $allows) === false) {
                 throw new InvalidDataTypeException('The adaptation value must be one of [y, n, sa].');
             }
         } else {
-            $allows = [self::LICENSE_CM_ADAPTATION_Y, self::LICENSE_CM_ADAPTATION_N];
+            $allows = array(self::LICENSE_CM_ADAPTATION_Y, self::LICENSE_CM_ADAPTATION_N);
 
             if (array_search($adaptation, $allows) === false) {
                 throw new InvalidDataTypeException('The adaptation value must be one of [y, n].');
@@ -124,7 +124,7 @@ class License implements Arrayable
 
     public function typeCanBe($type)
     {
-        return array_search($type, [self::LICENSE_CC, self::LICENSE_CM]) !== false;
+        return array_search($type, array(self::LICENSE_CC, self::LICENSE_CM)) !== false;
     }
 
     public function isValid()
@@ -164,7 +164,7 @@ class License implements Arrayable
 
     public static function fromJson($jsonData)
     {
-        $data = \GuzzleHttp\json_decode($jsonData, true);
+        $data = json_decode($jsonData, true);
 
         if (! $data) {
             throw new InvalidDataTypeException('The argument must be a valid json string.');
@@ -202,21 +202,21 @@ class License implements Arrayable
 
     public function computeContent()
     {
-        $content = [
+        $content = array(
             'adaptation' => $this->adaptation,
-        ];
+        );
         if ($this->isCC()) {
-            return array_merge($content, [ 'commercial' => $this->commercial ]);
+            return array_merge($content, array('commercial' => $this->commercial));
         }
 
-        return array_merge($content, ['price' => $this->price]);
+        return array_merge($content, array('price' => $this->price));
     }
 
     public function toArray()
     {
-        return [
+        return array(
             'type' => $this->type,
             'content' => $this->computeContent()
-        ];
+        );
     }
 }

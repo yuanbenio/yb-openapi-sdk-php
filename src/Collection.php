@@ -81,7 +81,7 @@ class Collection implements Arrayable, \Iterator, \Countable, Operable
 
     public function toArray()
     {
-        $array = [];
+        $array = array();
         foreach ($this->items as $k => $v) {
             array_push($array, $v->toArray());
         }
@@ -164,6 +164,6 @@ class Collection implements Arrayable, \Iterator, \Countable, Operable
             throw new PropertyNotExistException('The collection is empty.');
         }
 
-        return call_user_func([$this->first(), 'getField']);
+        return call_user_func(array($this->first(), 'getField'));
     }
 }

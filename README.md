@@ -20,10 +20,7 @@ $article->setLicense($license);
 
 $response = $client->post($article);
 
-$status = $response->getStatusCode();
-// 200: ok , 422: missing key of the data, 500: server error.
-
-$body = $response->getBody()->getContents();
+var_dump($response instance of Article);
 
 // multiple data
 $collect = new Collection();
@@ -35,7 +32,7 @@ $collect->push($article)->push($article2);
 
 $response = $client->post($collect);
 
-$body = $response->getBody()->getContents();
+var_dump($response instance of Colletion);
 
 ```
 
@@ -60,10 +57,6 @@ $article->setLicense($license)
 
 $response = $client->post($article);
 
-$status = $response->getStatusCode();
-// 200: ok , 422: missing key of the data, 500: server error.
-
-$body = $response->getBody()->getContents();
 
 // multiple data
 $collect = new Collection();
@@ -76,7 +69,6 @@ $collect->push($article)->push($article2);
 
 $response = $client->post($collect);
 
-$body = $response->getBody()->getContents();
 
 ```
 
@@ -89,21 +81,9 @@ $license = License::fromJson($json);
 ## Exception
 
 ```
+try {
 $response = $client->post($collect);
-
-$status = $response->getStatusCode();
-
-switch ($status) {
-    case 200:
-        $responseData = $response->getBody()->getContents();
-        break;
-    case 422:
-        $errorMessage = $response->getBody()->getContents();
-        break;
-    case 401:
-        $errorMessage = $response->getBody()->getContents();
-        break;
-    default:
-        break;
+} catch (\Exception $e) {
+    echo $e->getMessage();
 }
 ```

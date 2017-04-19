@@ -1,7 +1,7 @@
 <?php
 namespace Yuanben;
 
-use GuzzleHttp\Client as HttpClient;
+use Guzzle\Http\Client as HttpClient;
 
 use Yuanben\Contracts\Operable;
 use Yuanben\Exceptions\InvalidInstanceException;
@@ -19,9 +19,7 @@ class Client
         $this->config = $config;
 
         if (!$httpClient) {
-            $this->httpClient = new HttpClient([
-                'http_errors' => false
-            ]);
+            $this->httpClient = new HttpClient();
         }
     }
 
@@ -72,13 +70,14 @@ class Client
             $data = [$data];
         }
 
-        return $this->httpClient->post($path, [
-            'headers' => [
+        $response = $this->httpClient->post($path, array(
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $this->config->getToken()
-            ],
-            'json' => [$field => $data]
-        ]);
+            ), array($field => $data))->send();
+
+        $results = json_decode($response->getBody(true), true);
+
+        return (new ResultTransformer($resources, $results))->process();
 
     }
 
