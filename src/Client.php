@@ -20,6 +20,7 @@ class Client
 
         if (!$httpClient) {
             $this->httpClient = new HttpClient();
+            $this->httpClient->setConfig([ 'cert' => __DIR__. '/../data/ca.pem' ]);
         }
     }
 
@@ -83,8 +84,9 @@ class Client
             ), array($field => $data))->send();
 
         $results = json_decode($response->getBody(true), true);
+        $transform = new ResultTransformer($resources, $results);
 
-        return (new ResultTransformer($resources, $results))->process();
+        return $transform->process();
 
     }
 
