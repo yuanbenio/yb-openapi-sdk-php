@@ -1,2 +1,8 @@
 /vendor/
 /.idea/
+.settings/
+.buildpath
+.project
+
+composer.lock
+.DS_Store

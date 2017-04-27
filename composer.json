@@ -1,14 +1,24 @@
 {
-    "name": "yuanben/yb-openapi-sdk-php",
-    "description": "yb-openapi-sdk-php",
-    "require": {
-        "php": ">=5.3",
-        "guzzlehttp/guzzle": "3.7.2",
-        "ext-json": "*",
-        "ext-mbstring": "*"
-    },
-    "autoload": {
-        "psr-4": { "Yuanben\\" : "src/" }
-    },
-    "license": "MIT"
+	"name" : "yuanben/yb-openapi-sdk-php",
+	"description" : "yb-openapi-sdk-php",
+	"license" : "MIT",
+	"homepage" : "https://github.com/yuanbenio/yb-openapi-sdk-php",
+	"require" : {
+		"php" : ">=5.3",
+		"guzzlehttp/guzzle" : "3.7.2",
+		"ext-json" : "*",
+		"ext-mbstring" : "*",
+		"masterminds/html5" : "2.2.2"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Yuanben\\" : "src/"
+		}
+	},
+	"repositories": {
+    	"packagist": {
+        	"type": "composer",
+        	"url": "https://packagist.phpcomposer.com"
+    	}
+    }
 }

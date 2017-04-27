@@ -13,6 +13,7 @@ class Client
     protected $apiBase = 'https://openapi.yuanben.io/';
     protected $httpClient;
     protected $baseVersion = 'v1';
+    protected $clientImageBaseName = '';
 
     public function __construct(Config $config, $httpClient = null)
     {
@@ -53,6 +54,16 @@ class Client
     {
         $this->httpClient = $client;
     }
+    
+    public function setClientImageBaseName($name)
+    {
+        $this->clientImageBaseName = $name;
+    }
+    
+    public function getClientImageBaseName()
+    {
+        return $this->clientImageBaseName;
+    }
 
     public function getHttpClient()
     {
@@ -78,6 +89,13 @@ class Client
             $data = array($data);
         }
 
+        $contentProcessor = new ArticleContentProcessor($this);
+        
+        foreach($data as &$articleData)
+        {
+            $articleData['content'] = $contentProcessor->processArticleContent($articleData['content']);
+        }
+        
         $response = $this->httpClient->post($path, array(
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $this->config->getToken()
