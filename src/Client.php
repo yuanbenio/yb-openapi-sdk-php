@@ -21,7 +21,7 @@ class Client
 
         if (!$httpClient) {
             $this->httpClient = new HttpClient();
-            $this->httpClient->setConfig([ 'cert' => __DIR__. '/../data/ca.pem' ]);
+            $this->httpClient->setConfig(array('cert' => __DIR__. '/../data/ca.pem' ));
         }
     }
 
