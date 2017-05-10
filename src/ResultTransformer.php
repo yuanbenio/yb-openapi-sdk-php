@@ -41,25 +41,38 @@ class ResultTransformer
     public function articleProcess()
     {
         if ($this->isCollection) {
-            $collection = new Collection();
             foreach ($this->results as $key => $article) {
-                $collection->push($this->transArticle($article));
+                $this->transArticle($article);
             }
-
-            return $collection;
         } else {
-            return $this->transArticle($this->results[0]);
+            $this->transArticle($this->results[0]);
         }
+
+        return $this->original;
     }
 
     public function transArticle($singleData)
     {
-        $article = new Article($singleData['title'], $singleData['content']);
-        if (isset($singleData['license'])) {
-            $license = License::fromJson(json_encode($singleData['license']));
-            $article->setLicense($license);
+        $item = $this->original;
+        $status = $singleData['status'];
+        $article = $singleData['article'];
+
+        if ($this->isCollection) {
+            $item = $this->original->find('client_id', $article['client_id']);
         }
 
-        return $article;
+        if (! $item) {
+            dd($singleData, $this->original);
+        }
+
+        $this->attachProperties($item, $status);
+        $this->attachProperties($item, $article);
+    }
+
+    public function attachProperties($entity, $attributes)
+    {
+        foreach ($attributes as $key => $value) {
+            $entity->{$key} = $value;
+        }
     }
 }

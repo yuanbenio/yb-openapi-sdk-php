@@ -74,6 +74,20 @@ class Collection implements Arrayable, \Iterator, \Countable, Operable
         return !$this->count();
     }
 
+    public function find($key, $value)
+    {
+        $key = Util::toCamel($key);
+        $method = 'get'.$key;
+
+        foreach ($this->items as $index => $item) {
+            if (property_exists($item, $key) && $item->{$method}() == $value) {
+                return $item;
+            }
+        }
+
+        return false;
+    }
+
     public function getClass()
     {
         return $this->class;
