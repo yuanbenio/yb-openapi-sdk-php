@@ -21,7 +21,7 @@ class Client
 
         if (!$httpClient) {
             $this->httpClient = new HttpClient();
-            $this->httpClient->setConfig(array('cert' => __DIR__. '/../data/ca.pem' ));
+            $this->httpClient->setConfig(array('cert' => __DIR__. '/../data/ca.pem'));
         }
     }
 
@@ -54,12 +54,12 @@ class Client
     {
         $this->httpClient = $client;
     }
-    
+
     public function setClientImageBaseName($name)
     {
         $this->clientImageBaseName = $name;
     }
-    
+
     public function getClientImageBaseName()
     {
         return $this->clientImageBaseName;
@@ -90,12 +90,12 @@ class Client
         }
 
         $contentProcessor = new ArticleContentProcessor($this);
-        
+
         foreach($data as &$articleData)
         {
             $articleData['content'] = $contentProcessor->processArticleContent($articleData['content']);
         }
-        
+
         $response = $this->httpClient->post($path, array(
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $this->config->getToken()

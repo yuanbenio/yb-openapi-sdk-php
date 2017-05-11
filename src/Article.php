@@ -12,11 +12,24 @@ class Article implements Arrayable, Operable
     protected $license;
     protected $title;
     protected $content;
+    protected $clientId;
 
     public function __construct($title, $content)
     {
         $this->setTitle($title);
         $this->setContent($content);
+    }
+
+    public function setClientId($clientId)
+    {
+        $this->clientId = $clientId;
+
+        return $this;
+    }
+
+    public function getClientId()
+    {
+        return $this->clientId;
     }
 
     public function getAuthor()
@@ -72,6 +85,7 @@ class Article implements Arrayable, Operable
     public function toArray()
     {
         $article = array(
+            'client_id' => $this->clientId,
             'title' => $this->title,
             'content' => $this->content
         );
