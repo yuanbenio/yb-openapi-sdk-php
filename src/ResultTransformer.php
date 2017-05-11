@@ -2,6 +2,7 @@
 namespace Yuanben;
 
 use Yuanben\Contracts\Operable;
+use Yuanben\Exceptions\ClientIdNotExistException;
 
 class ResultTransformer
 {
@@ -61,18 +62,28 @@ class ResultTransformer
             $item = $this->original->find('client_id', $article['client_id']);
         }
 
-        if (! $item) {
-            dd($singleData, $this->original);
+        if (!$item) {
+            throw new ClientIdNotExistException();
         }
-
-        $this->attachProperties($item, $status);
-        $this->attachProperties($item, $article);
-    }
-
-    public function attachProperties($entity, $attributes)
-    {
-        foreach ($attributes as $key => $value) {
-            $entity->{$key} = $value;
+        
+        /**
+         * @var Article $item
+         */
+        
+        $item->setSuccess($status['success']);
+        $item->setErrorMessage($status['message']);
+        
+        if($item->isSuccess())
+        {
+            $item->setPublicKey($article['public_key']);
+            $item->setSignature($article['signature']);
+            $item->setHash($article['hash']);
+            $item->setBlockHash($article['block_hash']);
+            $item->setYuanbenId($article['yuanben_id']);
+            $item->setShortId($article['short_id']);
+            $item->setUrl($article['url']);
+            $item->setBadgeHtml($article['badge_html']);
+            $item->setBadgeUrl($article['badge_url']);
         }
     }
 }
