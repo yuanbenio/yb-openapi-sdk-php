@@ -1,4 +1,5 @@
 <?php
+
 namespace Yuanben;
 
 use Yuanben\Contracts\Arrayable;
@@ -8,84 +9,94 @@ use Yuanben\Exceptions\InvalidDataTypeException;
 class Article implements Arrayable, Operable
 {
     protected $field = 'articles';
-    
+
     /**
      * @var Author $author
      */
     protected $author;
-    
+
     /**
      * @var License $license
      */
     protected $license;
-    
+
     /**
      * @var string $title
      */
     protected $title;
-    
+
     /**
      * @var string $content
      */
     protected $content;
-    
+
+    /**
+     * @var string $writer
+     */
+    protected $writer;
+
+    /**
+     * @var string $channel
+     */
+    protected $channel;
+
     /**
      * @var string $clientId
      */
     protected $clientId;
-    
+
     /**
      * @var string $publicKey
      */
     protected $publicKey;
-    
+
     /**
      * @var string $signature
      */
     protected $signature;
-    
+
     /**
      * @var string $hash
      */
     protected $hash;
-    
+
     /**
      * @var string $blockHash
      */
     protected $blockHash;
-    
+
     /**
      * @var string $yuanbenId
      */
     protected $yuanbenId;
-    
+
     /**
      * @var string $shortId
      */
     protected $shortId;
-    
+
     /**
      * @var string $url
      */
     protected $url;
-    
+
     /**
      * @var string $badgeHtml
      */
     protected $badgeHtml;
-    
+
     /**
      * @var string $badgeUrl
      */
     protected $badgeUrl;
-    
+
     /**
-     * @var boolean $success;
+     * @var boolean $success ;
      */
     protected $success;
-    
+
     /**
-     * @var string $errorMessage;
+     * @var string $errorMessage ;
      */
     protected $errorMessage;
 
@@ -157,6 +168,32 @@ class Article implements Arrayable, Operable
         return $this;
     }
 
+    public function getWriter()
+    {
+        return $this->writer;
+    }
+
+    public function setWriter($writer)
+    {
+        $this->checkEmpty($writer, 'writer');
+        $this->writer = $writer;
+
+        return $this;
+    }
+
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    public function setChannel($channel)
+    {
+        $this->checkEmpty($channel, 'channel');
+        $this->channel = $channel;
+
+        return $this;
+    }
+
     public function toArray()
     {
         $article = array(
@@ -164,6 +201,14 @@ class Article implements Arrayable, Operable
             'title' => $this->title,
             'content' => $this->content
         );
+
+        if ($this->writer) {
+            $article = array_merge($article, array('writer' => $this->writer));
+        }
+
+        if ($this->channel) {
+            $article = array_merge($article, array('channel' => $this->channel));
+        }
 
         if ($this->author instanceof Author) {
             $article = array_merge($article, array('author' => $this->author->toArray()));
@@ -178,7 +223,7 @@ class Article implements Arrayable, Operable
 
     public function checkEmpty($content, $field = 'field')
     {
-        if (! is_string($content) || trim($content) == '') {
+        if (!is_string($content) || trim($content) == '') {
             throw new InvalidDataTypeException("The {$field} must be a string and must not be an empty string.");
         }
     }
@@ -187,6 +232,7 @@ class Article implements Arrayable, Operable
     {
         return $this->field;
     }
+
     /**
      * @return string $publicKey
      */
@@ -330,6 +376,7 @@ class Article implements Arrayable, Operable
     {
         $this->badgeUrl = $badgeUrl;
     }
+
     /**
      * @return boolean $success
      */
@@ -361,6 +408,5 @@ class Article implements Arrayable, Operable
     {
         $this->errorMessage = $errorMessage;
     }
-
 
 }
